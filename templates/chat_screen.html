@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat Screen</title>
+  <style>
+    /* CSS styles for the chat screen */
+    .chat-container {
+      display: flex;
+      height: 500px;
+    }
+    
+    .user-list {
+      width: 200px;
+      padding: 10px;
+      border-right: 1px solid #ccc;
+      overflow-y: scroll;
+    }
+    
+    .user-list .user {
+      padding: 5px;
+      cursor: pointer;
+    }
+    
+    .user-list .active-user {
+      font-weight: bold;
+    }
+    
+    .chat-box {
+      flex: 1;
+      padding: 10px;
+      border-left: 1px solid #ccc;
+      overflow-y: scroll;
+    }
+    
+    .message {
+      margin-bottom: 10px;
+    }
+    
+    .message .sender {
+      font-weight: bold;
+    }
+    
+    .message .timestamp {
+      font-size: 0.8em;
+      color: #888;
+    }
+    
+    .input-container {
+      margin-top: 10px;
+    }
+    
+    .input-container input[type="text"] {
+      width: 80%;
+      padding: 5px;
+    }
+    
+    .input-container input[type="submit"] {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="user-list" id="userList">
+      <!-- List of Users -->
+    </div>
+    
+    <div class="chat-box" id="chatBox">
+      <!-- Chat messages will be dynamically generated here -->
+    </div>
+  </div>
+  
+  <div class="input-container">
+    <input type="text" placeholder="Type your message" id="messageInput">
+    <input type="submit" value="Send" id="sendButton">
+  </div>
+  
+  <script>
+    // JavaScript code to handle the dynamic behavior of the chat screen
+    
+    // Sample user data
+    const users = [
+      { id: 1, name: 'John' },
+      { id: 2, name: 'Sarah' },
+      { id: 3, name: 'Alex' }
+      // More users...
+    ];
+    
+    // Get the elements
+    const userList = document.getElementById('userList');
+    const chatBox = document.getElementById('chatBox');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    let activeUserId = null;
+    
+    // Generate user list
+    function generateUserList() {
+      userList.innerHTML = '';
+      users.forEach(user => {
+        const userElement = document.createElement('div');
+        userElement.classList.add('user');
+        userElement.innerText = user.name;
+        userElement.addEventListener('click', () => {
+          setActiveUser(user.id);
+        });
+        userList.appendChild(userElement);
+      });
+    }
+    
+    // Set active user and fetch chat history
+    function setActiveUser(userId) {
+      activeUserId = userId;
+      const activeUserElement = document.querySelector('.active-user');
+      if (activeUserElement) {
+        activeUserElement.classList.remove('active-user');
+      }
+      const userElement = document.querySelector(`.user[data-user-id="${userId}"]`);
+      userElement.classList.add('active-user');
+      fetchChatHistory(userId);
+    }
+    
+    // Function to fetch and display chat history
+    function fetchChatHistory(userId) {
+        if (chat.sender === 'You') {
+            chatHtml += `
+              <div class="message">
+                <span class="sender">${chat.sender}:</span> ${chat.message}
+                <span class="timestamp">${chat.timestamp}</span>
+              </div>
+            `;
+          } else {
+            chatHtml += `
+              <div class="message received">
+                <span class="sender">${chat.sender}:</span> ${chat.message}
+                <span class="timestamp">${chat.timestamp}</span>
+              </div>
+            `;
+          }
+        });
+        
+        // Display the chat messages in the chat box
+        chatBox.innerHTML = chatHtml;
+      }

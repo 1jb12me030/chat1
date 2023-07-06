@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" maxlength="60" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" minlength="6" maxlength="10" required><br><br>
+        
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" required><br><br>
+        
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" required><br><br>
+        
+        <label for="contact_no">Contact No:</label>
+        <input type="tel" name="contact_no" maxlength="10" required><br><br>
+        
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
